@@ -1,3 +1,4 @@
+/*Declaracion de variables*/
 var caracteristicas = [{
     icon: "lock",
     caracteristica: "Seguridad",
