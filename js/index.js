@@ -62,6 +62,7 @@ var collapsible = $("ul.collapsible")
 var set;
 var fallidos = 0;
 var acertados = 0;
+/*Main de la pagina web*/
 $(document).ready(function () {
 
     creacionTemplateCartas();
@@ -70,6 +71,7 @@ $(document).ready(function () {
     $(".collapsible").collapsible()
     creacionCollapside()
 })
+//Para rellenar los Ul icom + name carateristica
 function creacionCollapside() {
     caracteristicas.forEach(elemento => {
         let template = ` <li class="noClick" data-identificador=${elemento.id}>
@@ -81,11 +83,13 @@ function creacionCollapside() {
         collapsible.append(template)
     })
 }
+/* Animacion para hacer crecer el texto al activar un duo correcto*/
 function efectoElemento(elemento) {
     elemento.animate({ fontSize: "+1.5em" }, 1000, function () {
         elemento.css("fontSize", "")
     });
 }
+//crea las cartas adelante y atras.
 function creacionTemplateCartas() {
     for (let i = 1; i <= 16; i++) {
         let template = `<div class="carta  hoverable" >
@@ -97,6 +101,7 @@ function creacionTemplateCartas() {
         cartas.append(template)
     }
 }
+/*-Cuando se hace click*/
 function eventoClickCartas() {
     $(".carta").on("click", function () {
         $(this).addClass("isSeleccionado")
@@ -107,6 +112,7 @@ function eventoClickCartas() {
             comparacion(isSeleccionado[0], isSeleccionado[1])
         }
         if ($(".activo").length == 16) {
+            //Muestra al modal
             swal({
                 title: '<strong><u>Resumen</u></strong>',
                 type: 'info',
@@ -126,10 +132,12 @@ function eventoClickCartas() {
                     '<i class="fa fa-thumbs-down"></i>',
                 cancelButtonAriaLabel: 'Thumbs down',
             })
+            //Quitar la opcion de seleccionar termianda todas...
             $(".carta").off()
         }
     })
 }
+//Verificar si son iguales
 function comparacion(elemeto1, elemeto2) {
     if (parseInt($(elemeto1).attr("data-identificador")) == parseInt($(elemeto2).attr("data-identificador"))) {
         console.log("estan iguales")
@@ -144,6 +152,7 @@ function comparacion(elemeto1, elemeto2) {
 
 
     }
+    //Despues de de un segundo quita la clase is seleccionado **Dar la vuelta...
     set = setTimeout(function () {
         console.log("ento")
         $(elemeto1).removeClass("isSeleccionado")
@@ -152,6 +161,7 @@ function comparacion(elemeto1, elemeto2) {
     }, 1000)
 
 }
+//Para poder ver los Li
 function activarLista(data_identificado) {
     $("li.noClick").each((index, elemento) => {
         if (parseInt($(elemento).attr("data-identificador")) == parseInt(data_identificado)) {
@@ -162,6 +172,7 @@ function activarLista(data_identificado) {
         }
     })
 }
+//llenar iconos aleatoriamente los cuadritos...
 function agregacionInformacionCartas() {
     numeroAleatorio = 0;
     let cartas = $(".carta");
